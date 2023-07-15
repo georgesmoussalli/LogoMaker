@@ -17,8 +17,6 @@ number = 10
 timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
 API = "GPT3"
 
-
-
 template_code = """
 <svg xmlns='http://www.w3.org/2000/svg' width='{background.width}' height='{background.height}'>
     <style>
