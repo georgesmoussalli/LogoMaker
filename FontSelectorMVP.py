@@ -1,6 +1,9 @@
 import json
 import numpy as np
 
+# TODO: Delete me
+def hello_world():
+    print("Hello, world")
 
 def euclidean_distance(vector1, vector2):
     return np.linalg.norm(vector1 - vector2)
