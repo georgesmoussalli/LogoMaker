@@ -84,7 +84,7 @@ def main( number : str , random_seed : int) -> list :
         svg_tab.append(svg)
 
         #Create or overwrite the svg in a .svg file 
-        #with open(str(_DIR_DATA) + "/outputs/" + str(i) + "svg_output.svg", 'w') as f:
+        #with open(str(_DIR_DATA) + "/svgoutputs/" + str(i) + "svg_output.svg", 'w') as f:
             #f.write(svg)
 
 

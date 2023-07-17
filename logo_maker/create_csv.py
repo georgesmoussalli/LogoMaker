@@ -2,8 +2,8 @@ import os
 import csv
 from pathlib import Path
 
-def create_csv_file(svg_list : list, folder_path : Path, input_parameters : str):
-    # Define the CSV file path
+def create_csv_file(svg_list : list, folder_path : Path, input_parameters):
+    # Define the CSV file pathgit 
     csv_file_path = os.path.join(folder_path, "output.csv")
 
     # Open the CSV file in write mode
