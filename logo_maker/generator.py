@@ -1,9 +1,4 @@
 import base64
-import csv
-from datetime import datetime
-import font_selector as FS
-import json
-import numpy as np
 import os
 from pathlib import Path
 
@@ -111,8 +106,6 @@ def apply_layout(background : BackgroundObject, title : TextObject , slogan : Te
         slogan.x = 50
         title.y = vertical_space(icon.y, title.font_size, background.height) + icon.height
         slogan.y = vertical_space(title.y, slogan.font_size, background.height)    
-        icon.file_path = str(_DIR_DATA) + "/moon.svg"
-        icon.data_uri = icon._generate_data_uri()  
         title.anchor = "middle"
         slogan.anchor = "middle"
         return 2
@@ -160,8 +153,7 @@ def generate_svg(background : BackgroundObject, title : TextObject , slogan : Te
             title_font_data=title_font_data_encoded,
             slogan_font_data=slogan_font_data_encoded
     )
-    
-    if(template == 2) : 
+    elif(template == 2) : 
         # Inject the font data into the SVG template
         svg_content = template_2_code.format(
             background=background,
@@ -171,7 +163,6 @@ def generate_svg(background : BackgroundObject, title : TextObject , slogan : Te
             title_font_data=title_font_data_encoded,
             slogan_font_data=slogan_font_data_encoded
     )
-
-
+    else : print(template)
     return svg_content
 
