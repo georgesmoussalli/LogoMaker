@@ -14,12 +14,25 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 # Get prompt
 prompt = get_prompt_for_chatGPT()
 
+# Puts all the data lowercase
+def lowercase_keys(data : dict) -> dict:
+    if isinstance(data, dict):
+        return {key.lower(): lowercase_keys(value) for key, value in data.items()}
+    elif isinstance(data, list):
+        return [lowercase_keys(item) for item in data]
+    else:
+        return data
+
 # Get GPT's response to my prompt
 def get_parameters() -> str:
-    response = openai.ChatCompletion.create(
+    my_openai_obj = openai.ChatCompletion.create(
         model = "gpt-3.5-turbo",
         messages = [
             {"role" : "user", "content" : prompt }
         ]
-    ) 
-    print(response)
+    )   
+    response = list(my_openai_obj.choices)[0]
+    response = response.to_dict()['message']['content']
+    python_object = lowercase_keys(json.loads(response))
+    return python_object
+

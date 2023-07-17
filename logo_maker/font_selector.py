@@ -28,10 +28,9 @@ def find_nearest_font(input_vector : np.array, random_seed : int) -> str:
 
     # Compute standard deviation of each feature
     std_devs = np.std(font_data_array, axis=0)
-    print(std_devs)
 
     # Add noise to input vector
-    noise = np.random.normal(scale=0.1, size = input_vector.shape) * 2 * std_devs
+    noise = np.random.normal(scale=0.1, size = input_vector.shape) * 4 * std_devs
     input_vector = input_vector + noise
     min_distance = float('inf')
     nearest_font = ''
