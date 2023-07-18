@@ -10,9 +10,15 @@ _HERE = Path(os.path.abspath(__file__))
 _DIR_ENV = _HERE.parent.parent.joinpath(".env")
 load_dotenv(_DIR_ENV)
 openai.api_key = os.getenv("OPENAI_API_KEY")
+model = "gpt-3.5-turbo"
 
 # Get prompt
 prompt = get_prompt_for_chatGPT()
+
+def get_GPT_prompt() : 
+    return prompt
+def get_model() : 
+    return model
 
 # Puts all the data lowercase
 def lowercase_keys(data : dict) -> dict:
@@ -35,3 +41,5 @@ def get_parameters() -> str:
     response = response.to_dict()['message']['content']
     python_object = lowercase_keys(json.loads(response))
     return python_object
+
+get_parameters()

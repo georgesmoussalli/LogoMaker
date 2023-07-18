@@ -1,9 +1,18 @@
 import os
 from pathlib import Path
 
-def create_html_file(svg_list: list, folder_path: Path) -> None:
+# does it work on other machines?
+def get_svg_files(folder_path : Path) -> list : 
+    svg_list = []
+    for filename in os.listdir(folder_path) : 
+        svg_list.append(os.path.join(folder_path,filename))
+    return svg_list
+
+def create_html_file(folder_path: Path) -> None:
+    
+    svg_list = get_svg_files(folder_path)
     # Open the HTML file in write mode
-    with open(os.path.join(folder_path, "output.html"), 'w') as f:
+    with open(os.path.join(folder_path.parent, "output.html"), 'w') as f:
         # Write the HTML header
         f.write("<html>\n<head>\n<title>Generated SVGs</title>\n</head>\n<body>\n")
         
@@ -28,13 +37,15 @@ def create_html_file(svg_list: list, folder_path: Path) -> None:
         # Write the upper row of SVGs
         f.write("<div class='row'>\n")
         for i in range(5):
-            f.write(f"<div class='svg-container'>{svg_list[i]}</div>\n")
+            svg_content = open(svg_list[i]).read()
+            f.write(f"<div class='svg-container'>{svg_content}</div>\n")
         f.write("</div>\n")
         
         # Write the lower row of SVGs
         f.write("<div class='row'>\n")
         for i in range(5, len(svg_list)):
-            f.write(f"<div class='svg-container'>{svg_list[i]}</div>\n")
+            svg_content = open(svg_list[i]).read()
+            f.write(f"<div class='svg-container'>{svg_content}</div>\n")
         f.write("</div>\n")
         
         # Write the HTML footer

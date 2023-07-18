@@ -17,7 +17,7 @@ def manhattan_distance(vector1 : np.array, vector2 : np.array) -> np.array:
     return np.sum(np.abs(vector1 - vector2))
 
 # find the name of the neareast font in input with noise 
-def find_nearest_font(input_vector : np.array, random_vector : np.array) -> str: 
+def find_nearest_font(input_vector : np.array) -> str: 
     # Load the font catalog from JSON file
     with open(str(_DIR_DATA) + '/MVPfonts.json', 'r') as file:
         catalog = json.load(file)
@@ -27,11 +27,11 @@ def find_nearest_font(input_vector : np.array, random_vector : np.array) -> str:
                             for font in catalog])
 
     # Compute standard deviation of each feature
-    std_devs = np.std(font_data_array, axis=0)
+    #std_devs = np.std(font_data_array, axis=0)
 
     # Add noise to input vector
-    noise = random_vector * 4 * std_devs
-    input_vector = input_vector + noise
+    #noise = random_vector * 4 * std_devs
+    #input_vector = input_vector + noise
     min_distance = float('inf')
     nearest_font = ''
 
@@ -51,5 +51,5 @@ def find_nearest_font(input_vector : np.array, random_vector : np.array) -> str:
 
     return nearest_font
 
-def layout_selector(number_possible_layouts : int, random : int) :
-    return (random % number_possible_layouts) 
+#def layout_selector(number_possible_layouts : int, random : int) :
+    #return (random % number_possible_layouts) 

@@ -8,16 +8,19 @@ from pathlib import Path
 def initialize_app():
     timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
     _HERE = Path(os.path.abspath(__file__))
-    _DIR_OUTPUTS = _HERE.parent.parent.joinpath("data/outputs/" + timestamp)
-    os.mkdir(_DIR_OUTPUTS)
+    _DIR_OUTPUTS_SVG = _HERE.parent.parent.joinpath("data/outputs", timestamp, "svg")
+    os.makedirs(_DIR_OUTPUTS_SVG, exist_ok= True)
+
 
     # Call the ierator function
-    svg_tab = svg_tab_generator.iterator(10, 0)
+    svg_tab_generator.iterator(10, _DIR_OUTPUTS_SVG)
 
-    # Create the HTML file
-    create_html.create_html_file(svg_tab, _DIR_OUTPUTS)
+    #Create the HTML file
+    create_html.create_html_file(_DIR_OUTPUTS_SVG)
 
-    # Create the CSV file
-    create_json.create_json_file(_DIR_OUTPUTS, svg_tab_generator.data)
+    #Create the JSON file
+    create_json.create_json_file(_DIR_OUTPUTS_SVG.parent, svg_tab_generator.data)
 
-    return _DIR_OUTPUTS
+    return _DIR_OUTPUTS_SVG.parent
+
+initialize_app()
