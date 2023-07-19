@@ -90,10 +90,7 @@ def vertical_space_text(y, font_size, max_height):
 def vertical_space_icon_to_text(y, font_size, max_height):
     return y +  100 * font_size / max_height
 
-def horizontal_space_icon_to_text(x, font_size, max_width) : 
-    return x + 100 * font_size / max_width 
-
-# add other layout with icon in the middle or instead of a letter or in the background or add a form in the background without any icon 
+# add other layout with icon in the middle or instead of a letter or in the background or add a form in the background
 def apply_layout(background : BackgroundObject, title : TextObject , slogan : TextObject, icon : IconObject, layout : int,) -> int : 
     if layout == 1 :
      
@@ -118,14 +115,16 @@ def apply_layout(background : BackgroundObject, title : TextObject , slogan : Te
         return 2
     
     elif layout == 3 : 
-        icon.x = 50 - icon.width
+        icon.x = 50 -  icon.width * 3/2
         icon.y = 50 - icon.height/2
-        title.x = horizontal_space_icon_to_text(icon.x, title.font_size, background.width)
-        slogan.x = 50
+        title.x = icon.x + icon.width
+        slogan.x = title.x - 10
         title.y = 50 + 50 * ((title.font_size - (title.font_size / 2))/background.height)
         slogan.y = vertical_space_text(title.y, slogan.font_size, background.height)    
         title.anchor = "start"
-        slogan.anchor = "start"
+        slogan.anchor = "start" 
+        print(title.x)
+        print(slogan.x)
         return 2
 
 

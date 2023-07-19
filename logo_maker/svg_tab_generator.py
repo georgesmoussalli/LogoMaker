@@ -3,13 +3,15 @@ import generator
 import get_gpt
 import numpy as np
 import os
+from datetime import datetime
 from pathlib import Path
 #import random
 
 #random.seed(0)
-number = 10 
+number = 10
 number_possible_layouts = 3
 data = get_gpt.get_parameters()
+timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
 print(data)
 
 
@@ -24,7 +26,7 @@ background = generator.BackgroundObject(
 
 title = generator.TextObject(
     content = "",
-    font_size = 40,
+    font_size = 35,
     font_color = None,
     font = None,
     x = -100000,
@@ -56,12 +58,11 @@ icon = generator.IconObject(
 title.content = data["company_name"]
 slogan.content = data["slogan"]
 
-def iterator( number : str , directory : Path) : 
+def iterator( number : int , directory : Path) : 
 
 # extract the values of chatGPT's response 
     for i in range(number) :
-
-        #random.seed(i)
+        print(i )  #random.seed(i)
         #random_vector = np.random.normal(scale=0.1, size = 6)
         #random_layout = random.randint(0,1000000)
 
@@ -92,3 +93,5 @@ def iterator( number : str , directory : Path) :
         with open(Path(str(directory) + "/" + str(i) + "_ouput_svg.svg"), 'w') as f:
             f.write(svg)
     
+    iterator(10,_DIR_OUTPUTS_SVG = _HERE.parent.parent.joinpath("data/outputs", timestamp, "svg")
+)
