@@ -42,4 +42,3 @@ def get_parameters() -> str:
     python_object = lowercase_keys(json.loads(response))
     return python_object
 
-get_parameters()

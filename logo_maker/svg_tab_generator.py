@@ -10,13 +10,11 @@ from pathlib import Path
 #random.seed(0)
 number = 10
 number_possible_layouts = 3
-data = get_gpt.get_parameters()
 timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
-print(data)
-
-
 _HERE = Path(os.path.abspath(__file__))
 _DIR_DATA = _HERE.parent.parent.joinpath("data")
+
+data = get_gpt.get_parameters()
 
 background = generator.BackgroundObject(
     color = None,
@@ -53,16 +51,22 @@ icon = generator.IconObject(
     height = 20
 )
 
-
-# initialize the values of some parameters
+        
 title.content = data["company_name"]
-slogan.content = data["slogan"]
+slogan.content = data["slogan"]   
+
+
+def get_data_for_print():
+    return data
+
 
 def iterator( number : int , directory : Path) : 
 
 # extract the values of chatGPT's response 
     for i in range(number) :
-        print(i )  #random.seed(i)
+        title.content = data["company_name"]
+        slogan.content = data["slogan"]     
+        print(i)  #random.seed(i)
         #random_vector = np.random.normal(scale=0.1, size = 6)
         #random_layout = random.randint(0,1000000)
 
@@ -75,6 +79,7 @@ def iterator( number : int , directory : Path) :
         slogan.font_color = data["design_" + str(design_number)]["color_palette"]["font_color"]
         #title.font = sel.find_nearest_font(np.array(list(data["design_" + str(design_number)]["font_vector"].values())), random_vector)
         title.font = sel.find_nearest_font(np.array(list(data["design_" + str(design_number)]["font_vector"].values())))
+        print(title.font)
         slogan.font = title.font
         icon.file_path = str(_DIR_DATA) + "/moon.svg"
         icon.data_uri = icon._generate_data_uri()  
@@ -93,5 +98,3 @@ def iterator( number : int , directory : Path) :
         with open(Path(str(directory) + "/" + str(i) + "_ouput_svg.svg"), 'w') as f:
             f.write(svg)
     
-    iterator(10,_DIR_OUTPUTS_SVG = _HERE.parent.parent.joinpath("data/outputs", timestamp, "svg")
-)

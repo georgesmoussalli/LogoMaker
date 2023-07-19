@@ -1,7 +1,7 @@
 import create_json
 import create_html
 from datetime import datetime
-import svg_tab_generator 
+import svg_tab_generator
 import os 
 from pathlib import Path
 
@@ -19,8 +19,7 @@ def initialize_app():
     create_html.create_html_file(_DIR_OUTPUTS_SVG)
 
     #Create the JSON file
-    create_json.create_json_file(_DIR_OUTPUTS_SVG.parent, svg_tab_generator.data)
+    create_json.create_json_file(_DIR_OUTPUTS_SVG.parent, svg_tab_generator.get_data_for_print())
 
     return _DIR_OUTPUTS_SVG.parent
 
-initialize_app()
