@@ -19,6 +19,7 @@ _HERE = Path(os.path.abspath(__file__))
 _DIR_DATA = _HERE.parent.parent.joinpath("data")
 
 data = get_gpt.get_parameters()
+print(data)
 
 
 background = background_object.BackgroundObject(
@@ -68,8 +69,7 @@ def iterator( number : int , directory : Path) :
 
     title.content = data["company_name"]
     slogan.content = data["slogan"] 
-    list_png_base64 = get_png_base64(icon.keyword, icon.color)
-
+    
 
 # extract the values of chatGPT's response 
     for i in range(number) :
@@ -86,11 +86,14 @@ def iterator( number : int , directory : Path) :
         title.font_color = data["design_" + str(design_number)]["color_palette"]["font_color"]
         slogan.font_color = data["design_" + str(design_number)]["color_palette"]["font_color"]
         icon.color = data["design_" + str(design_number)]["color_palette"]["icon_color"]
+        icon.color = icon.color[1:]
         #title.font = sel.find_nearest_font(np.array(list(data["design_" + str(design_number)]["font_vector"].values())), random_vector)
         title.font = sel.find_nearest_font(np.array(list(data["design_" + str(design_number)]["font_vector"].values())))
         slogan.font = title.font
-        icon.keyword = data["design_" + str(design_number)]["icon "]["icon_color"]
-        icon.png_base64 = list_png_base64[i]
+        icon.keyword = data["design_" + str(design_number)]["icon_keyword"]
+        #list_png_base64 = get_png_base64(icon.keyword, icon.color)
+        #icon.png_base64 = list_png_base64[(i % icon_number)]
+        icon.png_base64 = get_png_base64(icon.keyword, icon.color)
 
         #layout_number = sel.layout_selector(number_possible_layouts, random_layout) + 1
         layout_number = (i % number_possible_layouts) + 1

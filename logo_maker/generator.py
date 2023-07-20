@@ -43,7 +43,7 @@ template_2_code = """
     <rect width='{background.width}' height='{background.height}' fill='{background.color}' />
     <text x='{title.x}%' y='{title.y}%' text-anchor='{title.anchor}' font-size='{title.font_size}' font-family='{title.font}' fill='{title.font_color}'>{title.content}</text>
     <text x='{slogan.x}%' y='{slogan.y}%' text-anchor='{slogan.anchor}' font-size='{slogan.font_size}' font-family='{slogan.font}' fill='{slogan.font_color}'>{slogan.content}</text>
-    <image href="data:image/png;base64,'{icon.png_base64}' x='{icon.x}%' y='{icon.y}%' width='{icon.width}%' height='{icon.height}%' />
+    <image href="data:image/png;base64,{icon.png_base64}" x='{icon.x}%' y='{icon.y}%' width='{icon.width}%' height='{icon.height}%' />
 </svg>
 """
 
