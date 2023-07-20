@@ -32,7 +32,7 @@ def lowercase_keys(data : dict) -> dict:
 # Get GPT's response to my prompt
 def get_parameters() -> str:
     my_openai_obj = openai.ChatCompletion.create(
-        model = "gpt-3.5-turbo",
+        model = model,
         messages = [
             {"role" : "user", "content" : prompt }
         ]

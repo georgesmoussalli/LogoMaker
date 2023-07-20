@@ -1,6 +1,10 @@
+import background_object
+import icon_object
+import text_object
 import select_random as sel
 import generator
 import get_gpt
+from get_noun_project import get_png_base64
 import numpy as np
 import os
 from datetime import datetime
@@ -16,13 +20,14 @@ _DIR_DATA = _HERE.parent.parent.joinpath("data")
 
 data = get_gpt.get_parameters()
 
-background = generator.BackgroundObject(
+
+background = background_object.BackgroundObject(
     color = None,
     width = 400,
     height = 300
 )
 
-title = generator.TextObject(
+title = text_object.TextObject(
     content = "",
     font_size = 35,
     font_color = None,
@@ -43,18 +48,17 @@ slogan = generator.TextObject(
 
 )
 
-icon = generator.IconObject(
-    file_path= None,
+icon = icon_object.IconObject(
+    color = None,
     x = -100000,
     y = -100000,
     width = 20,
-    height = 20
+    height = 20,
+    keyword = None,
+    png_base64 = None
 )
 
         
-title.content = data["company_name"]
-slogan.content = data["slogan"]   
-
 
 def get_data_for_print():
     return data
@@ -62,11 +66,15 @@ def get_data_for_print():
 
 def iterator( number : int , directory : Path) : 
 
+    title.content = data["company_name"]
+    slogan.content = data["slogan"] 
+    list_png_base64 = get_png_base64(icon.keyword, icon.color)
+
+
 # extract the values of chatGPT's response 
     for i in range(number) :
-        title.content = data["company_name"]
-        slogan.content = data["slogan"]     
-        print(i)  #random.seed(i)
+ 
+        #random.seed(i)
         #random_vector = np.random.normal(scale=0.1, size = 6)
         #random_layout = random.randint(0,1000000)
 
@@ -77,12 +85,13 @@ def iterator( number : int , directory : Path) :
         background.color = data["design_" + str(design_number)]["color_palette"]["background_color"]
         title.font_color = data["design_" + str(design_number)]["color_palette"]["font_color"]
         slogan.font_color = data["design_" + str(design_number)]["color_palette"]["font_color"]
+        icon.color = data["design_" + str(design_number)]["color_palette"]["icon_color"]
         #title.font = sel.find_nearest_font(np.array(list(data["design_" + str(design_number)]["font_vector"].values())), random_vector)
         title.font = sel.find_nearest_font(np.array(list(data["design_" + str(design_number)]["font_vector"].values())))
-        print(title.font)
         slogan.font = title.font
-        icon.file_path = str(_DIR_DATA) + "/moon.svg"
-        icon.data_uri = icon._generate_data_uri()  
+        icon.keyword = data["design_" + str(design_number)]["icon "]["icon_color"]
+        icon.png_base64 = list_png_base64[i]
+
         #layout_number = sel.layout_selector(number_possible_layouts, random_layout) + 1
         layout_number = (i % number_possible_layouts) + 1
 

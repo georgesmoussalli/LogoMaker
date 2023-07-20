@@ -1,6 +1,9 @@
+from background_object import BackgroundObject
 import base64
+from icon_object import IconObject
 import os
 from pathlib import Path
+from text_object import TextObject
 
 _HERE = Path(os.path.abspath(__file__))
 _DIR_DATA = _HERE.parent.parent.joinpath("data")
@@ -20,7 +23,7 @@ template_1_code = """
     </style>
     <rect width='{background.width}' height='{background.height}' fill='{background.color}' />
     <text x='{title.x}%' y='{title.y}%' text-anchor='{title.anchor}' font-size='{title.font_size}' font-family='{title.font}' fill='{title.font_color}'>{title.content}</text>
-    <text x='50%' y='{slogan.y}%' text-anchor='{slogan.anchor}' font-size='{slogan.font_size}' font-family='{slogan.font}' fill='{slogan.font_color}'>{slogan.content}</text>
+    <text x='{slogan.x}%' y='{slogan.y}%' text-anchor='{slogan.anchor}' font-size='{slogan.font_size}' font-family='{slogan.font}' fill='{slogan.font_color}'>{slogan.content}</text>
 </svg>
 """
 
@@ -39,49 +42,10 @@ template_2_code = """
     </style>
     <rect width='{background.width}' height='{background.height}' fill='{background.color}' />
     <text x='{title.x}%' y='{title.y}%' text-anchor='{title.anchor}' font-size='{title.font_size}' font-family='{title.font}' fill='{title.font_color}'>{title.content}</text>
-    <text x='50%' y='{slogan.y}%' text-anchor='{slogan.anchor}' font-size='{slogan.font_size}' font-family='{slogan.font}' fill='{slogan.font_color}'>{slogan.content}</text>
-    <image href='{icon}' x='{icon.x}%' y='{icon.y}%' width='{icon.width}%' height='{icon.height}%' />
+    <text x='{slogan.x}%' y='{slogan.y}%' text-anchor='{slogan.anchor}' font-size='{slogan.font_size}' font-family='{slogan.font}' fill='{slogan.font_color}'>{slogan.content}</text>
+    <image href="data:image/png;base64,'{icon.png_base64}' x='{icon.x}%' y='{icon.y}%' width='{icon.width}%' height='{icon.height}%' />
 </svg>
 """
-
-class TextObject:
-    def __init__(self, content, font_size, font_color, font, x, y, anchor):
-        self.content = content
-        self.font_size = font_size
-        self.font_color = font_color
-        self.font = font
-        self.x = x
-        self.y = y
-        self.anchor = anchor
-
-class IconObject:
-    def __init__(self, file_path, x, y, width, height):
-        self.file_path = file_path 
-        self.data_uri = "None"
-        self.x = x
-        self.y = y
-        self.width = width
-        self.height = height
-
-    def _generate_data_uri(self) -> str:
-        with open(self.file_path, "rb") as f:
-            icon_data = f.read()
-        icon_data_uri = "data:image/svg+xml;base64," + base64.b64encode(icon_data).decode("utf-8")
-        return icon_data_uri
-    
-    def __str__(self) -> str:
-        return self.data_uri
-
-    
-class BackgroundObject:
-    def __init__(self, color, width, height):
-        self.color = color
-        self.width = width
-        self.height = height
-
-    def __str__(self):
-        return self.color
-    
 
 
 def vertical_space_text(y, font_size, max_height):
@@ -118,13 +82,11 @@ def apply_layout(background : BackgroundObject, title : TextObject , slogan : Te
         icon.x = 50 -  icon.width * 3/2
         icon.y = 50 - icon.height/2
         title.x = icon.x + icon.width
-        slogan.x = title.x - 10
+        slogan.x = title.x 
         title.y = 50 + 50 * ((title.font_size - (title.font_size / 2))/background.height)
         slogan.y = vertical_space_text(title.y, slogan.font_size, background.height)    
         title.anchor = "start"
         slogan.anchor = "start" 
-        print(title.x)
-        print(slogan.x)
         return 2
 
 
