@@ -14,6 +14,7 @@ from pathlib import Path
 #random.seed(0)
 number = 10
 number_possible_layouts = 3
+icon_number = 4
 timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
 _HERE = Path(os.path.abspath(__file__))
 _DIR_DATA = _HERE.parent.parent.joinpath("data")
