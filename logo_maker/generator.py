@@ -91,15 +91,13 @@ def apply_layout(background : BackgroundObject, title : TextObject , slogan : Te
 
 
 
-def generate_svg(background : BackgroundObject, title : TextObject , slogan : TextObject, icon : IconObject, layout : int) -> str :
+def generate_svg(background : BackgroundObject, title : TextObject , slogan : TextObject, icon : IconObject, layout : int, template : int) -> str :
     
     #Check if title is 2 words
     #boolean = splitter(brand_name, title, title2)
 
     #Chose and apply layout
     #layoutHelper.layout = LS.choose_layout()
-
-    template = apply_layout(background, title, slogan, icon, layout)
 
      # Read the font files as binary data
     font_formats = [".otf", ".ttf"]

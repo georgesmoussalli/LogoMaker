@@ -5,6 +5,7 @@ import select_random as sel
 import generator
 import get_gpt
 from get_noun_project import get_png_base64
+from layout import apply_layout
 import numpy as np
 import os
 from datetime import datetime
@@ -70,7 +71,8 @@ def iterator( number : int , directory : Path) :
 
     title.content = data["company_name"]
     slogan.content = data["slogan"] 
-    
+    j = 0 
+
 
 # extract the values of chatGPT's response 
     for i in range(number) :
@@ -80,6 +82,7 @@ def iterator( number : int , directory : Path) :
         #random_layout = random.randint(0,1000000)
 
         design_number = ( i % 5 )+ 1
+        j = 0 
 
 
     #initialize the values of the rest of the parameters 
@@ -91,16 +94,23 @@ def iterator( number : int , directory : Path) :
         #title.font = sel.find_nearest_font(np.array(list(data["design_" + str(design_number)]["font_vector"].values())), random_vector)
         title.font = sel.find_nearest_font(np.array(list(data["design_" + str(design_number)]["font_vector"].values())))
         slogan.font = title.font
-        icon.keyword = data["design_" + str(design_number)]["icon_keyword"]
-        #list_png_base64 = get_png_base64(icon.keyword, icon.color)
-        #icon.png_base64 = list_png_base64[(i % icon_number)]
-        icon.png_base64 = get_png_base64(icon.keyword, icon.color)
+
 
         #layout_number = sel.layout_selector(number_possible_layouts, random_layout) + 1
         layout_number = (i % number_possible_layouts) + 1
 
+        # Apply the layout 
+        template = apply_layout(background, title, slogan, icon, layout_number)
+        if(template == 2) : 
+            icon.keyword = data["design_" + str(j + 1)]["icon_keyword"]
+            icon.png_base64 = get_png_base64(icon.keyword, icon.color)
+            #list_png_base64 = get_png_base64(icon.keyword, icon.color)
+            #icon.png_base64 = list_png_base64[(i % icon_number)]
+            j+=1
+
+
         #generate the svg
-        svg = generator.generate_svg(background, title, slogan, icon, layout_number)   
+        svg = generator.generate_svg(background, title, slogan, icon, layout_number, template)   
         
         title.font = None
         slogan.font = None
