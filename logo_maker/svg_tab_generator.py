@@ -82,7 +82,6 @@ def iterator( number : int , directory : Path) :
         #random_layout = random.randint(0,1000000)
 
         design_number = ( i % 5 )+ 1
-        j = 0 
 
 
     #initialize the values of the rest of the parameters 
@@ -102,7 +101,8 @@ def iterator( number : int , directory : Path) :
         # Apply the layout 
         template = apply_layout(background, title, slogan, icon, layout_number)
         if(template == 2) : 
-            icon.keyword = data["design_" + str(j + 1)]["icon_keyword"]
+            icon.keyword = data["design_" + str((j%5) + 1)]["icon_keyword"]
+            print(icon.keyword)
             icon.png_base64 = get_png_base64(icon.keyword, icon.color)
             #list_png_base64 = get_png_base64(icon.keyword, icon.color)
             #icon.png_base64 = list_png_base64[(i % icon_number)]
@@ -118,6 +118,6 @@ def iterator( number : int , directory : Path) :
         #append to the list of svg we will try to visualize in html later
 
         #Create or overwrite the svg in a .svg file 
-        with open(Path(str(directory) + "/" + str(i) + "_ouput_svg.svg"), 'w') as f:
+        with open(Path(str(directory) + "/" + str(i) + "_output_svg.svg"), 'w') as f:
             f.write(svg)
     
