@@ -1,21 +1,23 @@
 import background_object
-import icon_object
-import text_object
-import select_random as sel
+from datetime import datetime
 import generator
 import get_gpt
 from get_noun_project import get_png_base64
+import icon_object
 from layout import apply_layout
 import numpy as np
 import os
-from datetime import datetime
 from pathlib import Path
+import select_random as sel
+import text_object
+
+
 #import random
 
 #random.seed(0)
 number = 10
 number_possible_layouts = 3
-icon_number = 4
+icon_number = 3
 timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
 _HERE = Path(os.path.abspath(__file__))
 _DIR_DATA = _HERE.parent.parent.joinpath("data")
@@ -103,9 +105,7 @@ def iterator( number : int , directory : Path) :
         if(template == 2) : 
             icon.keyword = data["design_" + str((j%5) + 1)]["icon_keyword"]
             print(icon.keyword)
-            icon.png_base64 = get_png_base64(icon.keyword, icon.color)
-            #list_png_base64 = get_png_base64(icon.keyword, icon.color)
-            #icon.png_base64 = list_png_base64[(i % icon_number)]
+            icon.png_base64 = get_png_base64(icon.keyword, icon.color, (i % icon_number))
             j+=1
 
 

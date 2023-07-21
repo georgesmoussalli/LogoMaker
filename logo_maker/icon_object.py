@@ -1,6 +1,3 @@
-import base64
-
-
 class IconObject:
     def __init__(self, color, x, y, width, height, keyword, png_base64):
         self.color = color

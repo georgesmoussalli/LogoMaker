@@ -1,5 +1,6 @@
 .DS_Store
-.env
 data/outputs
+.env
+scraping_fonts
 __pycache__
 venv

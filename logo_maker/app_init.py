@@ -1,9 +1,10 @@
 import create_json
 import create_html
 from datetime import datetime
-import svg_tab_generator
 import os 
 from pathlib import Path
+import svg_tab_generator
+
 
 def initialize_app():
     timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
