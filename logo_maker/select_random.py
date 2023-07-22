@@ -12,14 +12,10 @@ _DIR_DATA = _HERE.parent.parent.joinpath("data")
 def euclidean_distance(vector1 : np.array, vector2 : np.array) -> np.array:
     return np.linalg.norm(vector1 - vector2)
 
-# Calculate manhattan distance between two vectors
-def manhattan_distance(vector1 : np.array, vector2 : np.array) -> np.array:
-    return np.sum(np.abs(vector1 - vector2))
-
 # find the name of the neareast font in input with noise 
 def find_nearest_font(input_vector : np.array) -> str: 
     # Load the font catalog from JSON file
-    with open(str(_DIR_DATA) + '/MVPfonts.json', 'r') as file:
+    with open(str(_DIR_DATA) + '/fonts_mvp.json', 'r') as file:
         catalog = json.load(file)
     # Set random seed for reproducibility
     # Convert font data to 2D array

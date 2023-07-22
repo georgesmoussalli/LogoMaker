@@ -1,6 +1,7 @@
 import background_object
 from datetime import datetime
 import generator
+from get_font_file import get_font_file
 import get_gpt
 from get_noun_project import get_png_base64
 import icon_object
@@ -39,7 +40,8 @@ title = text_object.TextObject(
     font = None,
     x = -100000,
     y = -100000,
-    anchor = None 
+    anchor = None,
+    text_font_data_encoded= None
 )
 
 slogan = generator.TextObject(
@@ -49,7 +51,8 @@ slogan = generator.TextObject(
     font = None,
     x = -100000,
     y = -100000,
-    anchor= None 
+    anchor= None,
+    text_font_data_encoded= None
 
 )
 
@@ -95,7 +98,7 @@ def iterator( number : int , directory : Path) :
         #title.font = sel.find_nearest_font(np.array(list(data["design_" + str(design_number)]["font_vector"].values())), random_vector)
         title.font = sel.find_nearest_font(np.array(list(data["design_" + str(design_number)]["font_vector"].values())))
         slogan.font = title.font
-
+        get_font_file(title, slogan)
 
         #layout_number = sel.layout_selector(number_possible_layouts, random_layout) + 1
         layout_number = (i % number_possible_layouts) + 1
