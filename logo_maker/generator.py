@@ -27,9 +27,9 @@ def generate_svg( background : BackgroundObject, title : TextObject ,slogan : Te
     
     <rect width='{background.width}' height='{background.height}' fill='{background.color}' />
     <g id="logo-group">
-        <image xlink:href="data:image/png;base64,{container_icon.png_base64}" id="container" x="{container_icon.x}" y="{container_icon.y}" width="{container_icon.width}" height="{container_icon.height}" transform="translate({container_icon.translate}) scale({letter_icon.scale})"></image>
+        <image xlink:href="data:image/png;base64,{container_icon.png_base64}" id="container" x="{container_icon.x}" y="{container_icon.y}" width="{container_icon.width}" height="{container_icon.height}" transform="translate{container_icon.translate} scale({letter_icon.scale})"></image>
         <g id="logo-center" transform="translate(0,0)">   
-            <image xlink:href="data:image/png;base64,{letter_icon.png_base64}" id="icon_center" x="{letter_icon.x}" y="{letter_icon.y}" width="{letter_icon.width}" height="{letter_icon.height}" transform="translate({letter_icon.translate} scale({letter_icon.scale}))"></image>
+            <image xlink:href="data:image/png;base64,{letter_icon.png_base64}" id="icon_center" x="{letter_icon.x}" y="{letter_icon.y}" width="{letter_icon.width}" height="{letter_icon.height}" transform="translate{letter_icon.translate} scale({letter_icon.scale})"></image>
             <g id="slogan" style="font-style:{slogan.font_style};font-weight:{slogan.font_weight};font-size:{slogan.font_size};line-height:{slogan.line_height};font-family:'{slogan.font}';font-variant-ligatures:{slogan.font_variant_ligatures};text-align:{slogan.align};text-anchor:{slogan.anchor}" transform="translate({slogan.transform})">
             """
     for i in range (slogan.len) :
@@ -43,7 +43,7 @@ def generate_svg( background : BackgroundObject, title : TextObject ,slogan : Te
         template = template + string_to_path(title[i])
         
     template += """</g>
-            <image href="data:image/png;base64,{center_icon.png_base64}" x='{center_icon.x}' y='{center_icon.y}' width='{center_icon.width}' height='{center_icon.height}' transform="translate({container_icon.translate}) scale({letter_icon.scale})"/>
+            <image href="data:image/png;base64,{center_icon.png_base64}" x='{center_icon.x}' y='{center_icon.y}' width='{center_icon.width}' height='{center_icon.height}' transform="translate{container_icon.translate} scale({letter_icon.scale})"/>
             </g>
     </g>
         
