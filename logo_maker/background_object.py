@@ -4,6 +4,4 @@ class BackgroundObject:
         self.width = width
         self.height = height
 
-    def __str__(self):
-        return self.color
     

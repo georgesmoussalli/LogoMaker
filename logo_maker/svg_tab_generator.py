@@ -56,7 +56,21 @@ slogan = generator.TextObject(
 
 )
 
-icon = icon_object.IconObject(
+container_icon = icon_object.IconObject(
+    color = None,
+    x = -100000,
+    y = -100000,
+    width = 20,
+    height = 20,
+    keyword = None,
+    png_base64 = None,
+    scale = 1,
+    translate = (0,0) 
+    )
+
+
+
+center_icon = icon_object.IconObject(
     color = None,
     x = -100000,
     y = -100000,
@@ -66,7 +80,15 @@ icon = icon_object.IconObject(
     png_base64 = None
 )
 
-        
+letter_icon = icon_object.IconObject(
+    color = None,
+    x = -100000,
+    y = -100000,
+    width = 20,
+    height = 20,
+    keyword = None,
+    png_base64 = None
+)
 
 def get_data_for_print():
     return data
@@ -93,8 +115,8 @@ def iterator( number : int , directory : Path) :
         background.color = data["design_" + str(design_number)]["color_palette"]["background_color"]
         title.font_color = data["design_" + str(design_number)]["color_palette"]["font_color"]
         slogan.font_color = data["design_" + str(design_number)]["color_palette"]["font_color"]
-        icon.color = data["design_" + str(design_number)]["color_palette"]["icon_color"]
-        icon.color = icon.color[1:]
+        center_icon.color = data["design_" + str(design_number)]["color_palette"]["icon_color"]
+        center_icon.color = center_icon.color[1:]
         #title.font = sel.find_nearest_font(np.array(list(data["design_" + str(design_number)]["font_vector"].values())), random_vector)
         title.font = sel.find_nearest_font(np.array(list(data["design_" + str(design_number)]["font_vector"].values())))
         slogan.font = title.font
@@ -104,16 +126,16 @@ def iterator( number : int , directory : Path) :
         layout_number = (i % number_possible_layouts) + 1
 
         # Apply the layout 
-        template = apply_layout(background, title, slogan, icon, layout_number)
+        template = apply_layout(background, title, slogan, center_icon, layout_number)
         if(template == 2) : 
-            icon.keyword = data["design_" + str((j%5) + 1)]["icon_keyword"]
-            print(icon.keyword)
-            icon.png_base64 = get_png_base64(icon.keyword, icon.color, (i % icon_number))
+            center_icon.keyword = data["design_" + str((j%5) + 1)]["icon_keyword"]
+            print(center_icon.keyword)
+            center_icon.png_base64 = get_png_base64(center_icon.keyword, center_icon.color, (i % icon_number))
             j+=1
 
 
         #generate the svg
-        svg = generator.generate_svg(background, title, slogan, icon, layout_number, template)   
+        svg = generator.generate_svg(background, title, slogan,container_icon, center_icon, letter_icon) 
         
         title.font = None
         slogan.font = None
