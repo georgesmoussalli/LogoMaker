@@ -18,10 +18,7 @@ def find_nearest_font(input_vector : np.array) -> str:
     with open(str(_DIR_DATA) + '/fonts_mvp.json', 'r') as file:
         catalog = json.load(file)
     # Set random seed for reproducibility
-    # Convert font data to 2D array
-    font_data_array = np.array([[font['era'], font['maturity'], font['weight'], font['personality'], font['definition'], font['concept']]
-                            for font in catalog])
-
+    
     # Compute standard deviation of each feature
     #std_devs = np.std(font_data_array, axis=0)
 
@@ -43,7 +40,7 @@ def find_nearest_font(input_vector : np.array) -> str:
         # Exception handling in case a font's vector doesn't have all the keys necessary for crreating a vector of parameters
         except KeyError as e:
             missing_key = e.args[0]  # Get the missing key from the exception arguments
-            print(f"Skipping font {font['name']} due to missing key.")
+            print(f"Skipping font {font['name']} due to missing key{missing_key}.")
 
     return nearest_font
 

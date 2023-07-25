@@ -1,5 +1,4 @@
 from background_object import BackgroundObject
-import base64 
 from get_font_file import get_font_file
 from icon_object import IconObject
 import os
@@ -32,15 +31,13 @@ def generate_svg( background : BackgroundObject, title : TextObject ,slogan : Te
             <image xlink:href="data:image/png;base64,{letter_icon.png_base64}" id="icon_center" x="{letter_icon.x}" y="{letter_icon.y}" width="{letter_icon.width}" height="{letter_icon.height}" transform="translate{letter_icon.translate} scale({letter_icon.scale})"></image>
             <g id="slogan" style="font-style:{slogan.font_style};font-weight:{slogan.font_weight};font-size:{slogan.font_size};line-height:{slogan.line_height};font-family:'{slogan.font}';font-variant-ligatures:{slogan.font_variant_ligatures};text-align:{slogan.align};text-anchor:{slogan.anchor}" transform="translate({slogan.transform})">
             """
-    for i in range (slogan.len) :
-        template += string_to_path(slogan[i])
+    template += string_to_path(slogan)
     
     template += """</g>
             <g id="title" style="font-style:{title.font_style};font-weight:{title.font_weight};font-size:{title.font_size};line-height:{title.line_height};font-family:'{title.font}';font-variant-ligatures:{title.font_variant_ligatures};text-align:{title.align};text-anchor:{title.anchor}" transform="translate({title.transform})">
              
     """
-    for i in range (title.len) : 
-        template = template + string_to_path(title[i])
+    template +=  string_to_path(title)
         
     template += """</g>
             <image href="data:image/png;base64,{center_icon.png_base64}" x='{center_icon.x}' y='{center_icon.y}' width='{center_icon.width}' height='{center_icon.height}' transform="translate{container_icon.translate} scale({letter_icon.scale})"/>

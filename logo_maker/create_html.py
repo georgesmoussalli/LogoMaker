@@ -36,14 +36,14 @@ def create_html_file(folder_path: Path) -> None:
         
         # Write the upper row of SVGs
         f.write("<div class='row'>\n")
-        for i in range(5):
+        for i in range(3):  # Changed from 5 to 3
             svg_content = open(svg_list[i]).read()
             f.write(f"<div class='svg-container'>{svg_content}</div>\n")
         f.write("</div>\n")
         
         # Write the lower row of SVGs
         f.write("<div class='row'>\n")
-        for i in range(5, len(svg_list)):
+        for i in range(3, 6):  # Changed from (5, len(svg_list)) to (3, 6)
             svg_content = open(svg_list[i]).read()
             f.write(f"<div class='svg-container'>{svg_content}</div>\n")
         f.write("</div>\n")

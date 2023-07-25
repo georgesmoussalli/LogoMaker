@@ -16,9 +16,9 @@ import text_object
 #import random
 
 #random.seed(0)
-number = 10
+number = 6
 number_possible_layouts = 3
-icon_number = 3
+icon_number = 6
 timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
 _HERE = Path(os.path.abspath(__file__))
 _DIR_DATA = _HERE.parent.parent.joinpath("data")
@@ -41,7 +41,12 @@ title = text_object.TextObject(
     x = -100000,
     y = -100000,
     anchor = None,
-    text_font_data_encoded= None
+    text_font_data_encoded= None,
+    align = None,
+    transform = None,
+    font_style = None,
+    line_height = None,
+    spacing=None
 )
 
 slogan = generator.TextObject(
@@ -52,8 +57,12 @@ slogan = generator.TextObject(
     x = -100000,
     y = -100000,
     anchor= None,
-    text_font_data_encoded= None
-
+    text_font_data_encoded= None,
+    align = None,
+    transform = None,
+    font_style = None,
+    line_height = None,
+    spacing = None
 )
 
 container_icon = icon_object.IconObject(
@@ -66,7 +75,7 @@ container_icon = icon_object.IconObject(
     png_base64 = None,
     scale = 1,
     translate = (0,0) 
-    )
+)
 
 
 
@@ -77,7 +86,9 @@ center_icon = icon_object.IconObject(
     width = 20,
     height = 20,
     keyword = None,
-    png_base64 = None
+    png_base64 = None,
+    scale = 1,
+    translate = (0,0) 
 )
 
 letter_icon = icon_object.IconObject(
@@ -87,7 +98,9 @@ letter_icon = icon_object.IconObject(
     width = 20,
     height = 20,
     keyword = None,
-    png_base64 = None
+    png_base64 = None,
+    scale = 1,
+    translate = (0,0) 
 )
 
 def get_data_for_print():
@@ -108,8 +121,7 @@ def iterator( number : int , directory : Path) :
         #random_vector = np.random.normal(scale=0.1, size = 6)
         #random_layout = random.randint(0,1000000)
 
-        design_number = ( i % 5 )+ 1
-
+        design_number = i + 1
 
     #initialize the values of the rest of the parameters 
         background.color = data["design_" + str(design_number)]["color_palette"]["background_color"]
@@ -117,10 +129,14 @@ def iterator( number : int , directory : Path) :
         slogan.font_color = data["design_" + str(design_number)]["color_palette"]["font_color"]
         center_icon.color = data["design_" + str(design_number)]["color_palette"]["icon_color"]
         center_icon.color = center_icon.color[1:]
+        vector = list(data["design_" + str(design_number)]["font_vector"].values())
         #title.font = sel.find_nearest_font(np.array(list(data["design_" + str(design_number)]["font_vector"].values())), random_vector)
-        title.font = sel.find_nearest_font(np.array(list(data["design_" + str(design_number)]["font_vector"].values())))
+        title.font = sel.find_nearest_font(np.array(list(vector)[1:]))
         slogan.font = title.font
-        get_font_file(title, slogan)
+        title.font_style = vector[0]
+        slogan.font_style = title.font_size
+        title.text_font_data_encoded = get_font_file(title)
+        slogan.text_font_data_encoded = get_font_file(slogan)
 
         #layout_number = sel.layout_selector(number_possible_layouts, random_layout) + 1
         layout_number = (i % number_possible_layouts) + 1
@@ -128,9 +144,9 @@ def iterator( number : int , directory : Path) :
         # Apply the layout 
         template = apply_layout(background, title, slogan, center_icon, layout_number)
         if(template == 2) : 
-            center_icon.keyword = data["design_" + str((j%5) + 1)]["icon_keyword"]
+            center_icon.keyword = data["design_" + str((j%3) + 1)]["icon_keyword"]
             print(center_icon.keyword)
-            center_icon.png_base64 = get_png_base64(center_icon.keyword, center_icon.color, (i % icon_number))
+            center_icon.png_base64 = get_png_base64(center_icon.keyword, center_icon.color, i, number)
             j+=1
 
 
@@ -139,6 +155,8 @@ def iterator( number : int , directory : Path) :
         
         title.font = None
         slogan.font = None
+        title.font_style = None
+        slogan.font_style = None
 
         #append to the list of svg we will try to visualize in html later
 
