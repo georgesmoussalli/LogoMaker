@@ -3,7 +3,7 @@ from get_font_file import get_font_file
 from icon_object import IconObject
 import os
 from pathlib import Path
-from string_to_path import string_to_path
+from string_to_path import string_to_svg_paths
 from text_object import TextObject
 
 _HERE = Path(os.path.abspath(__file__))
@@ -16,11 +16,11 @@ def generate_svg( background : BackgroundObject, title : TextObject ,slogan : Te
     <style>
         @font-face {{
             font-family: '{title.font}';
-            src: url(data:font/ttf;base64,{title.title_font_data}) format('truetype');
+            src: url(data:font/ttf;base64,{title.text_font_data_encoded}) format('truetype');
         }}
         @font-face {{
             font-family: '{slogan.font}';
-            src: url(data:font/ttf;base64,{title.slogan_font_data}) format('truetype');
+            src: url(data:font/ttf;base64,{slogan.text_font_data_encoded}) format('truetype');
         }}
     </style>
     
@@ -31,13 +31,13 @@ def generate_svg( background : BackgroundObject, title : TextObject ,slogan : Te
             <image xlink:href="data:image/png;base64,{letter_icon.png_base64}" id="icon_center" x="{letter_icon.x}" y="{letter_icon.y}" width="{letter_icon.width}" height="{letter_icon.height}" transform="translate{letter_icon.translate} scale({letter_icon.scale})"></image>
             <g id="slogan" style="font-style:{slogan.font_style};font-weight:{slogan.font_weight};font-size:{slogan.font_size};line-height:{slogan.line_height};font-family:'{slogan.font}';font-variant-ligatures:{slogan.font_variant_ligatures};text-align:{slogan.align};text-anchor:{slogan.anchor}" transform="translate({slogan.transform})">
             """
-    template += string_to_path(slogan)
+    template += string_to_svg_paths(slogan)
     
     template += """</g>
             <g id="title" style="font-style:{title.font_style};font-weight:{title.font_weight};font-size:{title.font_size};line-height:{title.line_height};font-family:'{title.font}';font-variant-ligatures:{title.font_variant_ligatures};text-align:{title.align};text-anchor:{title.anchor}" transform="translate({title.transform})">
              
     """
-    template +=  string_to_path(title)
+    template +=  string_to_svg_paths(title)
         
     template += """</g>
             <image href="data:image/png;base64,{center_icon.png_base64}" x='{center_icon.x}' y='{center_icon.y}' width='{center_icon.width}' height='{center_icon.height}' transform="translate{container_icon.translate} scale({letter_icon.scale})"/>
