@@ -31,6 +31,7 @@ def create_html_file(folder_path: Path) -> None:
         f.write(".row {\n")
         f.write(f"    height: {row_height};\n")
         f.write(f"    white-space: nowrap;\n")
+        f.write("    margin-bottom: 20px;\n")  # Added margin to the bottom of each row
         f.write("}\n")
         f.write("</style>\n")
         
