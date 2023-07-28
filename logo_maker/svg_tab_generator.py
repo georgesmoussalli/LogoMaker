@@ -43,13 +43,10 @@ title = text_object.TextObject(
     anchor = None,
     text_font_data_encoded= None,
     align = None,
-    transform = None,
-    font_style = None,
-    line_height = None,
-    spacing=None
+    spacing=12
 )
 
-slogan = generator.TextObject(
+slogan = text_object.TextObject(
     content = "",
     font_size = 14,
     font_color = None,
@@ -62,7 +59,7 @@ slogan = generator.TextObject(
     transform = None,
     font_style = None,
     line_height = None,
-    spacing = None
+    spacing = 12
 )
 
 container_icon = icon_object.IconObject(
