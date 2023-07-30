@@ -60,7 +60,8 @@ slogan = TextObject(
     anchor = "",
     scale_factor= 0.1,
     align = "",
-    spacing=60   
+    spacing=60,
+    width = None
 )
 
 slogan.text_font_data_encoded = get_font_file.get_font_file(slogan)

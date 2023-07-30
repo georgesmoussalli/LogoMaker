@@ -11,6 +11,7 @@ import os
 from pathlib import Path
 import select_random as sel
 import text_object
+from text_layout import text_layout
 
 
 #import random
@@ -34,32 +35,33 @@ background = background_object.BackgroundObject(
 )
 
 title = text_object.TextObject(
-    content = "",
-    font_size = 35,
-    font_color = None,
+    content="",
+    font_size= None,
     font = None,
-    x = -100000,
-    y = -100000,
-    anchor = None,
+    x = -10000,
+    y = -10000,
+    font_color= None,
     text_font_data_encoded= None,
+    anchor = None,
+    scale_factor= None,
     align = None,
-    spacing=12
+    spacing= None,
+    width = None
 )
 
 slogan = text_object.TextObject(
-    content = "",
-    font_size = 14,
-    font_color = None,
+    content="",
+    font_size= None,
     font = None,
-    x = -100000,
-    y = -100000,
-    anchor= None,
+    x = -10000,
+    y = -10000,
+    font_color= None,
     text_font_data_encoded= None,
+    anchor = None,
+    scale_factor= None,
     align = None,
-    transform = None,
-    font_style = None,
-    line_height = None,
-    spacing = 12
+    spacing= None,
+    width = None
 )
 
 container_icon = icon_object.IconObject(
@@ -130,8 +132,6 @@ def iterator( number : int , directory : Path) :
         #title.font = sel.find_nearest_font(np.array(list(data["design_" + str(design_number)]["font_vector"].values())), random_vector)
         title.font = sel.find_nearest_font(np.array(list(vector)[1:]))
         slogan.font = title.font
-        title.font_style = vector[0]
-        slogan.font_style = title.font_size
         title.text_font_data_encoded = get_font_file(title)
         slogan.text_font_data_encoded = get_font_file(slogan)
 
@@ -146,16 +146,14 @@ def iterator( number : int , directory : Path) :
             center_icon.png_base64 = get_png_base64(center_icon.keyword, center_icon.color, i, number)
             j+=1
 
-
+        text_layout(title)
+        text_layout(slogan)
         #generate the svg
+        
         svg = generator.generate_svg(background, title, slogan,container_icon, center_icon, letter_icon) 
         
         title.font = None
         slogan.font = None
-        title.font_style = None
-        slogan.font_style = None
-
-        #append to the list of svg we will try to visualize in html later
 
         #Create or overwrite the svg in a .svg file 
         with open(Path(str(directory) + "/" + str(i) + "_output_svg.svg"), 'w') as f:

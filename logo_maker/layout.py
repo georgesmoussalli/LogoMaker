@@ -2,6 +2,8 @@ from background_object import BackgroundObject
 from icon_object import IconObject
 from text_object import TextObject
 
+# Add multiple layouts!! a lot and also think about the icon placement in the text zone
+
 def vertical_space_text(y, font_size, max_height):
     return y +  150 * font_size / max_height
 
