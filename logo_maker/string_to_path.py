@@ -49,37 +49,6 @@ def string_to_svg_paths(text : TextObject):
 
     return ''.join(svg_paths)
 
-slogan = TextObject(
-    content="Coffee",
-    font_size=40,
-    font="Unique",
-    x = 0,
-    y = 200,
-    font_color= "#E4EE3E",
-    text_font_data_encoded= None,
-    anchor = "",
-    scale_factor= 0.1,
-    align = "",
-    spacing=60,
-    width = None
-)
-
-slogan.text_font_data_encoded = get_font_file.get_font_file(slogan)
-
-def create_svg_document(svg_code, width, height):
-    svg_template = f"""
-    <svg width="{width}" height="{height}" version="1.1" xmlns="http://www.w3.org/2000/svg">
-      <rect width="100%" height="100%" fill="#cccccc" />
-      <g id="slogan">
-        {svg_code}
-      </g>
-    </svg>
-    """
-    return svg_template
-
-svg_document = create_svg_document(string_to_svg_paths(slogan), 400, 300)
-print(svg_document)
-
 
 
 

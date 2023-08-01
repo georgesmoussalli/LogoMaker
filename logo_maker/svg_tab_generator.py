@@ -11,12 +11,9 @@ import os
 from pathlib import Path
 import select_random as sel
 import text_object
-from text_layout import text_layout
+import random
 
-
-#import random
-
-#random.seed(0)
+random.seed(0)
 number = 6
 number_possible_layouts = 3
 icon_number = 6
@@ -44,7 +41,6 @@ title = text_object.TextObject(
     text_font_data_encoded= None,
     anchor = None,
     scale_factor= None,
-    align = None,
     spacing= None,
     width = None
 )
@@ -59,7 +55,6 @@ slogan = text_object.TextObject(
     text_font_data_encoded= None,
     anchor = None,
     scale_factor= None,
-    align = None,
     spacing= None,
     width = None
 )
@@ -72,9 +67,9 @@ container_icon = icon_object.IconObject(
     height = 20,
     keyword = None,
     png_base64 = None,
-    scale = 1,
-    translate = (0,0) 
-)
+    translate = (0,0), 
+    scale = 1
+    )
 
 
 
@@ -86,9 +81,9 @@ center_icon = icon_object.IconObject(
     height = 20,
     keyword = None,
     png_base64 = None,
-    scale = 1,
-    translate = (0,0) 
-)
+    translate = (0,0), 
+    scale = 1
+    )
 
 letter_icon = icon_object.IconObject(
     color = None,
@@ -98,9 +93,9 @@ letter_icon = icon_object.IconObject(
     height = 20,
     keyword = None,
     png_base64 = None,
-    scale = 1,
-    translate = (0,0) 
-)
+    translate = (0,0), 
+    scale = 1
+    )
 
 def get_data_for_print():
     return data
@@ -116,7 +111,8 @@ def iterator( number : int , directory : Path) :
 # extract the values of chatGPT's response 
     for i in range(number) :
  
-        #random.seed(i)
+        random.seed(i)
+        random_font_size = random .randint(0,10)
         #random_vector = np.random.normal(scale=0.1, size = 6)
         #random_layout = random.randint(0,1000000)
 
@@ -136,18 +132,16 @@ def iterator( number : int , directory : Path) :
         slogan.text_font_data_encoded = get_font_file(slogan)
 
         #layout_number = sel.layout_selector(number_possible_layouts, random_layout) + 1
-        layout_number = (i % number_possible_layouts) + 1
+        layout_number = (i % number_possible_layouts) + 1 
 
         # Apply the layout 
-        template = apply_layout(background, title, slogan, center_icon, layout_number)
+        template = apply_layout(background, title, slogan, center_icon, layout_number, random_font_size)
         if(template == 2) : 
             center_icon.keyword = data["design_" + str((j%3) + 1)]["icon_keyword"]
             print(center_icon.keyword)
             center_icon.png_base64 = get_png_base64(center_icon.keyword, center_icon.color, i, number)
             j+=1
-
-        text_layout(title)
-        text_layout(slogan)
+        
         #generate the svg
         
         svg = generator.generate_svg(background, title, slogan,container_icon, center_icon, letter_icon) 
