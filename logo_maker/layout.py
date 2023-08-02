@@ -18,7 +18,7 @@ def font_size_selector( text : TextObject, background : BackgroundObject, random
     
     return font_size
 
-def spacing_size_selector(text : TextObject, background : BackgroundObject) -> int :
+def spacing_size_selector(text : TextObject) -> int :
     # Calculate the total width required by the text at the chosen font size
     text_width = len(text.content) * text.font_size
     
@@ -32,21 +32,27 @@ def spacing_size_selector(text : TextObject, background : BackgroundObject) -> i
 
 def apply_layout(background : BackgroundObject, title : TextObject , slogan : TextObject, icon : IconObject, layout : int, random : int) -> int : 
     if layout == 1 :
+        title.width = 250
+        slogan.width = 250
+        title.font_size = font_size_selector(title, background, random)
+        slogan.font_size = min(font_size_selector(slogan, background, random), title.font_size)
+        title.spacing = spacing_size_selector(title)
+        slogan.spacing = spacing_size_selector(slogan)
         title.x = 50
         slogan.x = 50
         title.y = 50 + 50 * ((title.font_size - (title.font_size / 2))/background.height)
         slogan.y = vertical_space_text(title.y, slogan.font_size, background.height)
         title.anchor = "middle"
         slogan.anchor = "middle"
-        title.width = 250
-        slogan.width = 250
-        title.font_size = font_size_selector(title, random)
-        slogan.font_size = font_size_selector(slogan, random)
-        title.spacing = spacing_size_selector(title)
-        slogan.spacing = spacing_size_selector(slogan)
         return 1    
 
     elif layout == 2 : 
+        title.width = 250
+        slogan.width = 250
+        title.font_size = font_size_selector(title, background, random)        
+        slogan.font_size = min(font_size_selector(slogan,background, random), title.font_size)
+        title.spacing = spacing_size_selector(title)
+        slogan.spacing = spacing_size_selector(slogan)
         icon.x = 50 - icon.width/2
         icon.y = 50 - icon.height
         title.x = 50
@@ -55,15 +61,15 @@ def apply_layout(background : BackgroundObject, title : TextObject , slogan : Te
         slogan.y = vertical_space_text(title.y, slogan.font_size, background.height)    
         title.anchor = "middle"
         slogan.anchor = "middle"
-        title.width = 250
-        slogan.width = 250
-        title.font_size = font_size_selector(title, random)
-        slogan.font_size = font_size_selector(slogan, random)
-        title.spacing = spacing_size_selector(title)
-        slogan.spacing = spacing_size_selector(slogan)
         return 2
     
     elif layout == 3 : 
+        title.width = 250
+        slogan.width = 250
+        title.font_size = font_size_selector(title, background, random)
+        slogan.font_size = min(font_size_selector(slogan,background, random), title.font_size)
+        title.spacing = spacing_size_selector(title)
+        slogan.spacing = spacing_size_selector(slogan)
         icon.x = 50 -  icon.width * 3/2
         icon.y = 50 - icon.height/2
         title.x = icon.x + icon.width
@@ -72,10 +78,4 @@ def apply_layout(background : BackgroundObject, title : TextObject , slogan : Te
         slogan.y = vertical_space_text(title.y, slogan.font_size, background.height)    
         title.anchor = "start"
         slogan.anchor = "start" 
-        title.width = 250
-        slogan.width = 250
-        title.font_size = font_size_selector(title, random)
-        slogan.font_size = font_size_selector(slogan, random)
-        title.spacing = spacing_size_selector(title)
-        slogan.spacing = spacing_size_selector(slogan)
         return 2

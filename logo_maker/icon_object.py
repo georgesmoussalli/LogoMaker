@@ -1,6 +1,5 @@
 class IconObject:
-    def __init__(self, color, x, y, width, height, keyword, png_base64, translate, scale, show : bool):
-
+    def __init__(self, color, x, y, width, height, keyword, png_base64, translate, scale):
         self.color = color
         self.x = x
         self.y = y

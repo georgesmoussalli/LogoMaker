@@ -29,12 +29,12 @@ def generate_svg( background : BackgroundObject, title : TextObject ,slogan : Te
         <image xlink:href="data:image/png;base64,{container_icon.png_base64}" id="container" x="{container_icon.x}" y="{container_icon.y}" width="{container_icon.width}" height="{container_icon.height}" transform="translate{container_icon.translate} scale({letter_icon.scale})"></image>
         <g id="logo-center" transform="translate(0,0)">   
             <image xlink:href="data:image/png;base64,{letter_icon.png_base64}" id="icon_center" x="{letter_icon.x}" y="{letter_icon.y}" width="{letter_icon.width}" height="{letter_icon.height}" transform="translate{letter_icon.translate} scale({letter_icon.scale})"></image>
-            <g id="slogan" style="font-style:{slogan.font_style};font-size:{slogan.font_size};line-height:{slogan.line_height};font-family:'{slogan.font}';text-align:{slogan.align};text-anchor:{slogan.anchor}" transform="translate({slogan.transform})">
+            <g id="slogan" style="font-size:{slogan.font_size};font-family:'{slogan.font}';text-anchor:{slogan.anchor}">
             """
     template += string_to_svg_paths(slogan)
     
     template += """</g>
-            <g id="title" style="font-style:{title.font_style};font-size:{title.font_size};line-height:{title.line_height};font-family:'{title.font}';text-align:{title.align};text-anchor:{title.anchor}" transform="translate({title.transform})">
+            <g id="title" style="font-size:{title.font_size};font-family:'{title.font}';text-anchor:{title.anchor}">
              
     """
     template +=  string_to_svg_paths(title)
