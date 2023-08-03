@@ -27,7 +27,7 @@ def generate_svg( background : BackgroundObject, title : TextObject ,slogan : Te
     <rect width='{background.width}' height='{background.height}' fill='{background.color}' />
     <g id="logo-group">
         <image xlink:href="data:image/png;base64,{container_icon.png_base64}" id="container" x="{container_icon.x}" y="{container_icon.y}" width="{container_icon.width}" height="{container_icon.height}" transform="translate{container_icon.translate} scale({letter_icon.scale})"></image>
-        <g id="logo-center" transform="translate(0,0)">   
+        <g id="logo-center" transform="translate({title.center_x},{title.center_y})">   
             <image xlink:href="data:image/png;base64,{letter_icon.png_base64}" id="icon_center" x="{letter_icon.x}" y="{letter_icon.y}" width="{letter_icon.width}" height="{letter_icon.height}" transform="translate{letter_icon.translate} scale({letter_icon.scale})"></image>
             <g id="slogan" style="font-size:{slogan.font_size};font-family:'{slogan.font}';text-anchor:{slogan.anchor}">
             """

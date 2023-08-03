@@ -14,7 +14,6 @@ import text_object
 import random
 
 random.seed(0)
-number = 6
 number_possible_layouts = 3
 icon_number = 6
 timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
@@ -42,7 +41,9 @@ title = text_object.TextObject(
     anchor = None,
     scale_factor= None,
     spacing= None,
-    width = None
+    width = None,
+    center_x= None,
+    center_y=None
 )
 
 slogan = text_object.TextObject(
@@ -56,7 +57,10 @@ slogan = text_object.TextObject(
     anchor = None,
     scale_factor= None,
     spacing= None,
-    width = None
+    width = None,
+    center_x= None,
+    center_y=None
+    
 )
 
 container_icon = icon_object.IconObject(

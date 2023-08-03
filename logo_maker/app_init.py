@@ -14,7 +14,7 @@ def initialize_app():
 
 
     # Call the ierator function
-    svg_tab_generator.iterator(10, _DIR_OUTPUTS_SVG)
+    svg_tab_generator.iterator(6, _DIR_OUTPUTS_SVG)
 
     #Create the HTML file
     create_html.create_html_file(_DIR_OUTPUTS_SVG)

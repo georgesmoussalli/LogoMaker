@@ -1,5 +1,5 @@
 class TextObject:
-    def __init__(self, content, font_size, font_color, font, x, y, text_font_data_encoded, anchor, scale_factor , spacing, width) :
+    def __init__(self, content, font_size, font_color, font, x, y, text_font_data_encoded, anchor, scale_factor , spacing, width, center_x , center_y ) :
         self.content = content
         self.font_size = font_size
         self.font_color = font_color
@@ -11,3 +11,5 @@ class TextObject:
         self.scale_factor = scale_factor
         self.spacing = spacing
         self.width = width
+        self.center_x = center_x
+        self.center_y = center_y
