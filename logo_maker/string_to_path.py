@@ -29,13 +29,15 @@ def letter_to_svg_path(letter, text : TextObject):
     # Draw the glyph with the pen
     glyph_set[glyph_name].draw(pen)
 
+    glyph_width = glyph_set[glyph_name].width
+
     # Get the SVG path commands
     svg_path = pen.getCommands()
 
     # Format the SVG path element with the letter style
     svg_path_element = f"""<path letter="{letter}" style="font-size:{text.font_size}px; font-family:'{text.font}';" d="{svg_path}" fill="{text.font_color}" transform=" translate({text.x}, {text.y}) scale({text.scale_factor}) scale(1, -1) "></path>"""
-    text.x += text.spacing
-
+    text.x += glyph_width * text.scale_factor
+    text.width += glyph_width * text.scale_factor
     return svg_path_element
 
 def string_to_svg_paths(text : TextObject):
