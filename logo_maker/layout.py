@@ -4,7 +4,7 @@ from text_object import TextObject
 
 
 def vertical_space_text(y, font_size, max_height):
-    return y +  150 * font_size / max_height
+    return y +  5 * font_size
 
 def vertical_space_icon_to_text(y, font_size, max_height):
     return y +  100 * font_size / max_height
@@ -14,15 +14,15 @@ def apply_layout(background : BackgroundObject, title : TextObject , slogan : Te
     if layout == 1 :
 
         title.anchor = "middle"
-        slogan.anchor = "middle"
         center_icon.x= -10000
         center_icon.y = -10000
         title.center_x = 200 - 0.5 * title.width
-        title.center_y = 50 + 50 * ((title.font_size - (title.font_size / 2))/background.height)
+        title.center_y = 150 + 0.125 * title.font_size
 
         if(slogan.content != "") :
-            slogan.x = 50
             slogan.y = vertical_space_text(title.y, slogan.font_size, background.height)
+            print(slogan.y)
+            print(title.y)
             slogan.anchor = "middle"
     
         return 1    
