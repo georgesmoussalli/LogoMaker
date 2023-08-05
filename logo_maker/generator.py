@@ -7,6 +7,8 @@ import background_object
 from text_object import TextObject
 from icon_object import IconObject
 from layout import apply_layout
+from get_noun_project import get_png_base64
+
 
 
 _HERE = Path(os.path.abspath(__file__))
@@ -30,9 +32,8 @@ def generate_svg( background : BackgroundObject, title : TextObject ,slogan : Te
     
     <rect width='{background.width}' height='{background.height}' fill='{background.color}' />
     <g id="logo-group">
-        <image xlink:href="data:image/png;base64,{container_icon.png_base64}" id="container" x="{container_icon.x}" y="{container_icon.y}" width="{container_icon.width}" height="{container_icon.height}" transform="translate{container_icon.translate} scale({letter_icon.scale})"></image>
+        <image href="data:image/png;base64,{center_icon.png_base64}" x='{center_icon.x}' y='{center_icon.y}' width='{center_icon.width}' height='{center_icon.height}' transform=" scale({letter_icon.scale})"/>
         <g id="title-container" transform="translate({title.group_x},{title.group_y})">   
-            <image xlink:href="data:image/png;base64,{letter_icon.png_base64}" id="icon_center" x="{letter_icon.x}" y="{letter_icon.y}" width="{letter_icon.width}" height="{letter_icon.height}" transform="translate{letter_icon.translate} scale({letter_icon.scale})"></image>
             <g id="title" style="font-size:{title.font_size};font-family:'{title.font}'">
             """
     template += tab[1]
@@ -46,7 +47,6 @@ def generate_svg( background : BackgroundObject, title : TextObject ,slogan : Te
     template += tab[2]
         
     template += """</g>
-            <image href="data:image/png;base64,{center_icon.png_base64}" x='{center_icon.x}' y='{center_icon.y}' width='{center_icon.width}' height='{center_icon.height}' transform="translate{container_icon.translate} scale({letter_icon.scale})"/>
         </g>
     </g>
         
@@ -109,20 +109,18 @@ container_icon = icon_object.IconObject(
     height = 20,
     keyword = None,
     png_base64 = None,
-    translate = (0,0), 
     scale = 1
     )
 
 
 center_icon = icon_object.IconObject(
-    color = "#A111AA",
-    x = -100000,
-    y = -100000,
+    color = "AA11AA",
+    x = 0,
+    y = 0,
     width = 20,
     height = 20,
-    keyword = None,
+    keyword = "Coffee",
     png_base64 = None,
-    translate = (0,0), 
     scale = 1
     )
 
@@ -134,10 +132,10 @@ letter_icon = icon_object.IconObject(
     height = 20,
     keyword = None,
     png_base64 = None,
-    translate = (0,0), 
     scale = 1
     )
-
+            
+center_icon.png_base64 = get_png_base64(center_icon.keyword, center_icon.color, 1, 2)
 tab = apply_layout(background, title, slogan,center_icon, 2)
 svg = generate_svg(background, title, slogan, container_icon, center_icon, letter_icon)    
 with open(Path(str(_DIR_DATA) + "/_output_svg.svg"), 'w') as f:  

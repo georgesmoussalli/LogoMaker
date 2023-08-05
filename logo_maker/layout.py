@@ -6,7 +6,7 @@ from get_font_file import get_font_file
 import random
 
 
-def font_size_selector( text : TextObject, background : BackgroundObject, random_size : int) -> int :
+def font_size_selector( text : TextObject, background : BackgroundObject, random_size : float) -> float :
     # Calculate the initial font size based on the ratio of logo width to text length
     initial_font_size = int(background.width / len(text.content)) + random_size
     
@@ -29,10 +29,8 @@ def font_size_to_scale(font_size : int, font_size_range : range, scale_range : r
     scale = min_scale + ((font_size - min_font_size) / (max_font_size - min_font_size)) * (max_scale - min_scale)
     return scale
 
-
-def vertical_space_icon_to_text(y, font_size, max_height):
-    return y +  100 * font_size / max_height
-
+def icon_size_selector(background : BackgroundObject, random_size : float) -> float : 
+    return background.height * 0.25 + random_size
     
 def apply_layout(background : BackgroundObject, title : TextObject , slogan : TextObject, center_icon : IconObject, layout : int ) -> int : 
     random.seed(1)
@@ -65,30 +63,32 @@ def apply_layout(background : BackgroundObject, title : TextObject , slogan : Te
         tab = [None]*3
         title_paths = string_to_svg_paths(title)
         slogan_paths = string_to_svg_paths(slogan)
-        center_icon.x= -10000
-        center_icon.y = -10000
         title.group_x = 200 - title.width * 0.5
         title.group_y = 150 + title.font_size
         slogan.group_x = 200 - slogan.width * 0.5
         slogan.group_y = vertical_space_text(title, slogan)
+        center_icon.height = icon_size_selector(background, 2 * random_size)
+        center_icon.width = center_icon.height
+        center_icon.x= 200 - center_icon.width/2
+        center_icon.y = 150 - 1.1 * center_icon.height
         tab[0] = 2
         tab[1] = title_paths
         tab[2] = slogan_paths
         return tab
     
     elif layout == 3 : 
-        title.width = 250
-        slogan.width = 250
-        center_icon.x = 50 -  center_icon.width * 3/2
-        center_icon.y = 50 - center_icon.height/2
-        title.x = center_icon.x + center_icon.width
-        slogan.x = title.x 
-        title.y = 50 + 50 * ((title.font_size - (title.font_size / 2))/background.height)
-        slogan.y = vertical_space_text(title.y, slogan.font_size, background.height)    
-        title.anchor = "start"
-        slogan.anchor = "start"
-        title.scale_factor = 0.05
-        slogan.scale_factor = 0.05
-        title.center_x = 50
-        title.center_y = title.y
+        tab = [None]*3
+        title_paths = string_to_svg_paths(title)
+        slogan_paths = string_to_svg_paths(slogan)
+        title.group_x = 200 - title.width * 0.5
+        title.group_y = 150 + title.font_size
+        slogan.group_x = 200 - slogan.width * 0.5
+        slogan.group_y = vertical_space_text(title, slogan)
+        center_icon.height = icon_size_selector(background, 2 * random_size)
+        center_icon.width = center_icon.height
+        center_icon.x= 200 - center_icon.width/2
+        center_icon.y = 150 - 1.1 * center_icon.height
+        tab[0] = 2
+        tab[1] = title_paths
+        tab[2] = slogan_paths
         return 2
