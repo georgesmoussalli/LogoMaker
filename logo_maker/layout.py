@@ -36,7 +36,7 @@ def apply_layout(background : BackgroundObject, title : TextObject , slogan : Te
     random.seed(1)
     random_size = random.uniform(-2.5,2.5)
     font_size_range = (10, 70)  # This means that font sizes go from 10 to 20
-    scale_range = (0.015, 0.1)  # This means that scales go from 1.0 to 2.0
+    scale_range = (0.015, 0.09)  # This means that scales go from 1.0 to 2.0
     title.font_size = title_1.font_size = title_2.font_size = font_size_selector(title, background, random_size)
     title.scale_factor = title_1.scale_factor = title_2.scale_factor = font_size_to_scale(title.font_size, font_size_range, scale_range)
     slogan.font_size = min(font_size_selector(slogan, background, random_size), title.font_size)
