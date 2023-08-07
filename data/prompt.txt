@@ -8,4 +8,4 @@ Output =  {{"slogan" : "Example"}, {"company_name" : "Example"}, "design_1":{{"i
 
 Be sure to return a dictionary and not a list.
 
-Generate the output for the following prompt: “My business is a hype coffee shop in Paris, Coffee Inc. Our motto is coffee is best with us. The clientele we aim are finance guys working in the business neighbourhood.”
+Generate the output for the following prompt: “My business is a barber shop in Atlanta called "BARFRO", specialized in afro american hair. Our motto is "Fresh afro for a fresh day" "

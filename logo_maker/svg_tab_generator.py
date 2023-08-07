@@ -200,9 +200,6 @@ def iterator( number : int , directory : Path) :
 
         #generate the svg
         svg = generate_svg(background, title, slogan, container_icon, center_icon, letter_icon, split, title_1, title_2, tab)    
-        print(tab[0]," title "+" / " + str(title.font_size) +" / " + str(title.x) + " / " + str(title.y) + " / " +str(title.width) + " / " +str(title.group_x) + " / " +" / " +str(title.group_y))
-        print(" title1 " +" / " + str(title_1.font_size) + " / " +str(title_1.x) + " / " +str(title_1.y) + " / " +str(title_1.width) +  " / " +str(title_1.group_x) +  " / " +" / " +str(title_1.group_y))
-        print(" title2 " + " / " +str(title_2.font_size) + " / " +str(title_2.x) +  " / " +str(title_2.y) +  " / " +str(title_2.width) +" / " + str(title_2.group_x) + " / " +str(title_2.group_y))
         title.font = None
         slogan.font = None
 
@@ -213,6 +210,5 @@ def iterator( number : int , directory : Path) :
         #Create or overwrite the svg in a .svg file 
         with open(Path(str(directory) + "/" + str(i) + "_output_svg.svg"), 'w') as f:
             f.write(svg)
-            print(f)
     
     
