@@ -1,18 +1,11 @@
 from background_object import BackgroundObject
 import os
 from pathlib import Path
-import text_object
-import icon_object
-import background_object
 from text_object import TextObject
 from icon_object import IconObject
-from layout import apply_layout
-from get_noun_project import get_png_base64
-import random
 
 
 _HERE = Path(os.path.abspath(__file__))
-_DIR_DATA = _HERE.parent.parent.joinpath("data")
 
 
 def generate_svg( background : BackgroundObject, title : TextObject ,slogan : TextObject, container_icon : IconObject, center_icon : IconObject, letter_icon : IconObject, splitted : bool, title_1 : TextObject, title_2 : TextObject, tab) -> str :

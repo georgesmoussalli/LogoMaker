@@ -11,7 +11,7 @@ def font_size_selector( text : TextObject, background : BackgroundObject, random
     initial_font_size = int(background.width / len(text.content)) + random_size
     
     # Limit the font size to the specified range
-    font_size = max(min(initial_font_size, 70), 10)   
+    font_size = max(min(initial_font_size, 60), 10)   
     return font_size
 
 def vertical_space_text(title : TextObject, slogan : TextObject):

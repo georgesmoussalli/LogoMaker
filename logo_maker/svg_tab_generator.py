@@ -35,7 +35,7 @@ def title_splitter(title: text_object.TextObject, title_1 : text_object.TextObje
         # if there's no space in the title, return False and the original title objects
         return False
     else:
-        split_flag = False #random.choice([True, False])
+        split_flag = True #random.choice([True, False])
         
         if not split_flag:
             # if split flag is False, return False and the original title objects
@@ -161,6 +161,12 @@ def iterator( number : int , directory : Path) :
     title.content = data["company_name"]
     slogan.content = data["slogan"] 
 
+    cap_or_not = random.choice([True, False])
+
+    if(cap_or_not) : 
+        title.content = title.content.upper()
+        slogan.content = slogan.content.upper()
+        
 
 # extract the values of chatGPT's response 
     for i in range(number) :
@@ -186,7 +192,7 @@ def iterator( number : int , directory : Path) :
         title.text_font_data_encoded = get_font_file(title)
         slogan.text_font_data_encoded = get_font_file(slogan)
         center_icon.keyword = data["design_" + str((i%2) + 1)]["icon"]
-        center_icon.png_base64 = get_png_base64(center_icon.keyword, center_icon.color, i, 7)
+        center_icon.png_base64 = get_png_base64(center_icon.keyword, center_icon.color, i%3, 3)
 
         # Is th title splitted?
         split = title_splitter(title, title_1, title_2)
@@ -205,7 +211,12 @@ def iterator( number : int , directory : Path) :
 
         title.x = title_1.x = title_2.x = slogan.x = 0
         title.y = title_1.y = title_2.y = slogan.y = 0
+        title.group_x = title_1.group_x = title_2.group_x = slogan.group_x = 0
+        title.group_y = title_1.group_y = title_2.group_y = slogan.group_y = 0
         title.width = title_1.width = title_2.width = slogan.width = 0
+        title.font_size = title_1.font_size = title_2.font_size = slogan.font_size = 0
+        title.scale_factor = title_1.scale_factor = title_2.scale_factor = slogan.scale_factor = 0
+
     
         #Create or overwrite the svg in a .svg file 
         with open(Path(str(directory) + "/" + str(i) + "_output_svg.svg"), 'w') as f:
