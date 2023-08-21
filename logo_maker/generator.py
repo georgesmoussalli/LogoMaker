@@ -1,14 +1,8 @@
 from background_object import BackgroundObject
 import os
 from pathlib import Path
-import text_object
-import icon_object
-import background_object
 from text_object import TextObject
 from icon_object import IconObject
-from layout import apply_layout
-from get_noun_project import get_png_base64
-import random
 
 
 _HERE = Path(os.path.abspath(__file__))

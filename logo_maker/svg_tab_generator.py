@@ -35,7 +35,7 @@ def title_splitter(title: text_object.TextObject, title_1 : text_object.TextObje
         # if there's no space in the title, return False and the original title objects
         return False
     else:
-        split_flag = False #random.choice([True, False])
+        split_flag = True #random.choice([True, False])
         
         if not split_flag:
             # if split flag is False, return False and the original title objects
@@ -165,8 +165,6 @@ def iterator( number : int , directory : Path) :
 # extract the values of chatGPT's response 
     for i in range(number) :
  
-        random.seed(i)
-        random_font_size = random .randint(0,10)
         #random_vector = np.random.normal(scale=0.1, size = 6)
         #random_layout = random.randint(0,1000000)
 

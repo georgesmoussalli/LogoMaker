@@ -10,7 +10,7 @@ _HERE = Path(os.path.abspath(__file__))
 _DIR_ENV = _HERE.parent.parent.joinpath(".env")
 load_dotenv(_DIR_ENV)
 openai.api_key = os.getenv("OPENAI_API_KEY")
-model = "gpt-4"
+model = "gpt-3.5-turbo"
 
 # Get prompt
 prompt = get_prompt_for_chatGPT()
@@ -42,3 +42,5 @@ def get_parameters() -> str:
     python_object = lowercase_keys(json.loads(response))
     return python_object
 
+data = get_parameters()
+print(data)
