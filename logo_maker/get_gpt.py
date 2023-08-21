@@ -41,6 +41,3 @@ def get_parameters() -> str:
     response = response.to_dict()['message']['content']
     python_object = lowercase_keys(json.loads(response))
     return python_object
-
-data = get_parameters()
-print(data)
