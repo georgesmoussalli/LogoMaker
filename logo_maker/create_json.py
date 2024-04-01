@@ -4,6 +4,7 @@ import json
 from pathlib import Path
 
 def create_json_file(folder_path : Path, data):
+    print("create_json_file")
     json_file_path = os.path.join(folder_path, "output.json")
 
     # Convert the Python dictionary to a JSON string

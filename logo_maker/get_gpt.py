@@ -31,6 +31,7 @@ def lowercase_keys(data : dict) -> dict:
 
 # Get GPT's response to my prompt
 def get_parameters() -> str:
+    print("get_gpt.get_parameters()")
     my_openai_obj = openai.ChatCompletion.create(
         model = model,
         messages = [

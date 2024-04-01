@@ -9,6 +9,7 @@ def get_svg_files(folder_path : Path) -> list :
     return svg_list
 
 def create_html_file(folder_path: Path) -> None:
+    print("create_html")
     
     svg_list = get_svg_files(folder_path)
     # Open the HTML file in write mode

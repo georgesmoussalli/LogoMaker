@@ -17,7 +17,7 @@ random.seed(0)
 icon_number = 6
 timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
 _HERE = Path(os.path.abspath(__file__))
-
+print("svg_tab_generator")
 data = get_gpt.get_parameters()
 print(data)
 
